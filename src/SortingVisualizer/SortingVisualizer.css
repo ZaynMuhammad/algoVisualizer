@@ -1,0 +1,16 @@
+.array-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 4em;
+  padding-top: 50px;
+  max-height: 640px;
+}
+  
+.array-bar {
+  align-self: flex-end;
+  width: 2px;
+  background-color: pink;
+  display: inline-block;
+  margin: 0 1px;
+}
