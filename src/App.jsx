@@ -19,6 +19,8 @@ const SECONDARY_COLOR = 'red';
 
 function App() {
   const [sortingArray, setSortingArray] = useState([])
+  const [restoreArrayToSameSeed, setRestoreArrayToSameSeed] = useState([])
+  const [isRegenerateBars, setIsRegenerateBars] = useState(false)
 
   const windowWidth = window.innerWidth
   const windowHeight = window.innerHeight
@@ -41,23 +43,30 @@ function App() {
         arr.push(randomIntFromInterval(5, maxNumber))
     }
     setSortingArray(arr)
+    setRestoreArrayToSameSeed(arr.slice())
   }, [windowWidth, windowHeight])
 
+  const setColorOnBarComparison = (animations, idx, arrayBars) => {
+    const [barOneIdx, barTwoIdx] = animations[idx];
+    const barOneStyle = arrayBars[barOneIdx].style;
+    const barTwoStyle = arrayBars[barTwoIdx].style;
+    const color = idx % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+    setTimeout(() => {
+      barOneStyle.backgroundColor = color;
+      barTwoStyle.backgroundColor = color;
+    }, idx * ANIMATION_SPEED_MS);
+  }
+
   const mergeSort = () => {
+    if (restoreArrayToSameSeed.length) 
+      setSortingArray(restoreArrayToSameSeed)    
+
     const animations = getMergeSortAnimations(sortingArray);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
-        // Extract this into a function
-        const [barOneIdx, barTwoIdx] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        setColorOnBarComparison(animations, i, arrayBars)
       } else {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
@@ -74,14 +83,7 @@ function App() {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
-        const [barOneIdx, barTwoIdx] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        setColorOnBarComparison(animations, i, arrayBars)
       } else { 
         setTimeout(() => {
             const [heightOne, heightTwo] = animations[i];
@@ -101,14 +103,7 @@ function App() {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
-        const [barOneIdx, barTwoIdx] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        setColorOnBarComparison(animations, i, arrayBars)
       } else { 
         setTimeout(() => {
             const [heightOne, heightTwo] = animations[i];
@@ -133,6 +128,7 @@ function App() {
       <SortingVisualizer
         handleResetArray={handleResetArray}
         sortingArray={sortingArray}
+        isRegenerateBars={isRegenerateBars}
       />
     </div>
   );

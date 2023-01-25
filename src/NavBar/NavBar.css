@@ -5,6 +5,10 @@
     justify-content: space-around;
 }
 
+.rightMargin {
+    margin-right: 25em;
+}
+
 ul {
     list-style: none;
     color: white;

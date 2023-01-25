@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import './SortingVisualizer.css'
 
-const SortingVisualizer = ({ handleResetArray, sortingArray }) => {
+const SortingVisualizer = ({ handleResetArray, sortingArray, isRegenerateBars }) => {
 
     
     useEffect(() => {
