@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/algoVisualizer/static/css/main.cde9fe0e.css",
+    "main.js": "/algoVisualizer/static/js/main.fa3f94d1.js",
+    "index.html": "/algoVisualizer/index.html",
+    "main.cde9fe0e.css.map": "/algoVisualizer/static/css/main.cde9fe0e.css.map",
+    "main.fa3f94d1.js.map": "/algoVisualizer/static/js/main.fa3f94d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cde9fe0e.css",
+    "static/js/main.fa3f94d1.js"
+  ]
+}
